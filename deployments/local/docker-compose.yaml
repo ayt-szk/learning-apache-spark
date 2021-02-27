@@ -1,0 +1,51 @@
+version: '3'
+services:
+  spark-master:
+    build:
+      context: ../../build/master/
+      dockerfile: Dockerfile
+    container_name: spark-master
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+      - "4040:4040"
+      - "18080:18080"
+    volumes: 
+      - ../../:/root
+    environment:
+      - INIT_DAEMON_STEP=setup_spark
+    networks:
+      - spark_network
+
+  spark-worker-1:
+    build:
+      context: ../../build/worker/
+      dockerfile: Dockerfile
+    container_name: spark-worker-1
+    tty: true
+    ports:
+      - "8081:8081"
+    volumes: 
+      - ../../:/root
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+    networks:
+      - spark_network
+
+  spark-worker-2:
+    build:
+      context: ../../build/worker/
+      dockerfile: Dockerfile
+    container_name: spark-worker-2
+    tty: true
+    ports:
+      - "8082:8081"
+    volumes: 
+      - ../../:/root
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+    networks:
+      - spark_network
+
+networks:
+  spark_network:
