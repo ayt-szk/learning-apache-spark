@@ -50,9 +50,22 @@ query = f"""
             LIMIT 10
         """
 
-# query = "SELECT COUNT(*) FROM BreadBasket"
+# query = f"""
+#             SELECT 
+#                 Item,
+#                 COUNT(*) AS item_count
+#             FROM 
+#                 BreadBasket
+#             GROUP BY
+#                 Item
+#             ORDER BY
+#                 item_count DESC
+#         """
 
 df = spark.sql(query)
-
 df.show()
+
+# df.groupBy("Item").count().sort("count", ascending=False).show()
+# df.show()
+
 spark.stop()

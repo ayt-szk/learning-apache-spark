@@ -7,3 +7,4 @@ ENV LANG="ja_JP.utf8" \
     LC_ALL="ja_JP.utf8"
 
 RUN apk --update add coreutils
+RUN apk add procps

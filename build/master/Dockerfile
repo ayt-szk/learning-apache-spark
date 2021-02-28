@@ -7,6 +7,7 @@ ENV LANG="ja_JP.utf8" \
     LC_ALL="ja_JP.utf8"
 
 RUN apk --update add coreutils
+RUN apk add procps
 
 RUN rm -f /usr/bin/python \
     && ln -s /usr/bin/python3.7 /usr/bin/python \
