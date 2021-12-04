@@ -17,6 +17,5 @@ RUN mkdir /tmp/spark-events \
     && mkdir /usr/local/lib/jars
 
 COPY files/etc /etc
-COPY lib/jars /usr/local/lib/jars
 
 RUN mv /etc/spark-defaults.conf /spark/conf
